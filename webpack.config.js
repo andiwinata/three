@@ -14,10 +14,14 @@ module.exports = {
   module: {
     rules: [
       {
-        // Include ts, tsx, and js files.
         test: /\.(tsx?)|(js)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.(css)$/,
+        exclude: /node_modules/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
     ],
   },
