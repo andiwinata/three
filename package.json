@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch",
+    "build": "yarn build:types && yarn build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "bundle:dev": "yarn clean && webpack --mode development",
+    "bundle:prod": "yarn clean && webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +20,19 @@
   },
   "dependencies": {
     "three": "^0.97.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.1.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   }
 }
