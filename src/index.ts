@@ -1,41 +1,35 @@
+import { createGround } from './components/ground';
+import { createGrid } from './components/grid';
+import { createRenderer } from './components/renderer';
 import * as THREE from 'three';
 import './reset.css';
+import { createCamera } from './components/camera';
+import { createHemiLight, createDirLight } from './components/light';
 
 // Create an empty scene
 const scene = new THREE.Scene();
 
-// Create a basic perspective camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 4;
+//create cam
+const { camera, cameraGroup } = createCamera();
+scene.add(cameraGroup);
 
-// Create a renderer with Antialiasing
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+scene.add(createGround());
+scene.add(createDirLight());
+scene.add(createHemiLight());
 
-// Configure renderer clear color
-renderer.setClearColor('#000000');
+const grid = createGrid(-15, 0, -15);
+scene.add(grid);
 
-// Configure renderer size
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-// Append Renderer to DOM
+const renderer = createRenderer();
 document.body.appendChild(renderer.domElement);
-
-// Create a Cube Mesh with basic material
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: '#433F81' });
-const cube = new THREE.Mesh(geometry, material);
-
-// Add cube to Scene
-scene.add(cube);
 
 // Render Loop
 const render = function() {
   requestAnimationFrame(render);
 
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  grid.rotation.x += 0.01;
+  grid.rotation.y += 0.01;
 
-  // Render the scene
   renderer.render(scene, camera);
 };
 

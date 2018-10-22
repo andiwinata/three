@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
+    "dev": "webpack-dev-server",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check -- --watch",
     "build": "yarn build:types && yarn build:js",
@@ -28,14 +29,16 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-typescript": "^7.1.0",
-    "@types/three": "^0.92.24",
+    "@types/three": "^0.93.4",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.0",
+    "hard-source-webpack-plugin": "^0.12.0",
     "html-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.0",
     "typescript": "^3.1.1",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }
